@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Event Bubbling</title>
+  </head>
+  <body>
+    <div id="parent" style="padding: 20px; border: 1px solid black">
+      Parent Div
+      <button id="child">Click me!</button>
+    </div>
+
+    <script>
+      document
+        .getElementById("child")
+        .addEventListener("click", function (event) {
+          //event.stopPropagation(); // Olayın kabarcıklanmasını durdurur
+          console.log("Button clicked!");
+        });
+
+      document.getElementById("parent").addEventListener("click", function () {
+        console.log("Parent div clicked!");
+      });
+    </script>
+  </body>
+</html>

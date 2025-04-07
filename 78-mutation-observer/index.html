@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MutationObserver Example</title>
+  </head>
+  <body>
+    <div id="myElement" class="originalClass">This is a sample element.</div>
+
+    <button id="changeClassButton">Change Class</button>
+
+    <script>
+      // Callback function: called when a DOM change is detected
+      const callback = function (mutationsList, observer) {
+        for (const mutation of mutationsList) {
+          if (mutation.type === "attributes") {
+            console.log("Attribute changed: ", mutation.attributeName);
+            console.log(
+              "New class: ",
+              document.getElementById("myElement").className
+            );
+          }
+        }
+      };
+
+      // Create the MutationObserver
+      const observer = new MutationObserver(callback);
+
+      // Specify the type of changes to observe: 'attributes' => attribute changes
+      const config = { attributes: true };
+
+      // Start observing the target DOM element
+      const targetNode = document.getElementById("myElement");
+      observer.observe(targetNode, config);
+
+      // Change the class when the button is clicked
+      document
+        .getElementById("changeClassButton")
+        .addEventListener("click", () => {
+          targetNode.className = "newClass"; // Change the class
+        });
+    </script>
+  </body>
+</html>

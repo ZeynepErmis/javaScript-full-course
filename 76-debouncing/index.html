@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Debouncing Example</title>
+  </head>
+  <body>
+    <h1>Type in the input box to trigger event</h1>
+    <input type="text" id="search" placeholder="Start typing..." />
+
+    <script>
+      let debounceTimeout;
+
+      function debounce(func, delay) {
+        return function () {
+          clearTimeout(debounceTimeout);
+          debounceTimeout = setTimeout(func, delay);
+        };
+      }
+
+      function onInputChange() {
+        console.log("Input event triggered");
+      }
+
+      // 300ms bekledikten sonra tetiklenmesi için debouncing uygula
+      document
+        .getElementById("search")
+        .addEventListener("input", debounce(onInputChange, 300));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Throttling Example</title>
+  </head>
+  <body>
+    <h1>Scroll to Trigger Event</h1>
+    <div style="height: 2000px; background-color: lightgray">
+      Scroll down to see throttled scroll event in the console.
+    </div>
+
+    <script>
+      let lastTime = 0;
+
+      function throttle(fn, delay) {
+        return function () {
+          const now = Date.now();
+          if (now - lastTime > delay) {
+            lastTime = now;
+            fn();
+          }
+        };
+      }
+
+      function onScroll() {
+        console.log("Scroll event triggered");
+      }
+
+      window.addEventListener("scroll", throttle(onScroll, 500));
+    </script>
+  </body>
+</html>
